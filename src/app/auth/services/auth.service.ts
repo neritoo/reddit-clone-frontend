@@ -22,7 +22,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService) { }
 
-  signup(signupRequest: SignupRequest): Observable<string> {
+  signup(signupRequest: SignupRequest): Observable<any> {
     return this.http.post(`${this.url}/auth/signup`, signupRequest, {responseType: 'text'});
 
   }

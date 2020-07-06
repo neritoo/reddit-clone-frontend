@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SignupRequest } from './signup-request';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import Swall from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +17,8 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   user: SignupRequest;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder,
+    private toastr: ToastrService, private router: Router) {
     this.user = new SignupRequest;
   }
 
@@ -45,6 +50,8 @@ export class SignupComponent implements OnInit {
 
   signup() {
 
+    this.waitAlert();
+
     if (this.signUpForm.invalid) {
       return Object.values(this.signUpForm.controls)
       .forEach(control => {
@@ -56,8 +63,23 @@ export class SignupComponent implements OnInit {
     this.user.password = this.signUpForm.controls.password.value;
     this.user.email = this.signUpForm.controls.email.value;
 
-    this.authService.signup(this.user).subscribe(response => console.log(response));
+    this.authService.signup(this.user).subscribe(response => {
+      Swal.close();
+      console.log(response);
+      this.router.navigate(['/login'], { queryParams: {registered: true}})
+    }, () => {
+      this.toastr.error("Fallo al registrar usuario! Porfavor, intente nuevamente");
+    });
 
+  }
+
+  waitAlert() {
+    Swal.fire({
+      icon: 'info',
+      title: 'Espere porfavor...',
+      allowOutsideClick: false,
+      showConfirmButton: false
+    });
   }
 
 }

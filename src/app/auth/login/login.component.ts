@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from '../services/auth.service';
 import { LoginRequest } from './login-request';
 import { LoginResponse } from './login-response';
+import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +17,29 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loginRequest: LoginRequest;
   loginResponse: LoginResponse;
-  isError;
+  registerSuccessMessage: string;
+  isError: boolean;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
     this.loginRequest = new LoginRequest();
+    this.loginResponse = new LoginResponse();
+    this.registerSuccessMessage = '';
   }
 
   ngOnInit(): void {
     this.createForm();
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params.registered !== undefined && params.registered === 'true') {
+        this.toastr.success('Usuario registrado correctamente');
+        this.registerSuccessMessage = 'Porfavor, verifique su bandeja de entradas en su correo electrónico' +
+        'para activar su cuenta. Active su cuenta antes de iniciar sesión!'
+      }
+    });
   }
 
   // Getters validators
@@ -54,10 +72,15 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.loginRequest).subscribe(response => {
+      this.toastr.success('Sesión iniciada');
       this.loginResponse = response;
       console.log(this.loginResponse);
-      console.log('Login Successful');
-    })
+      this.isError = false;
+      this.router.navigateByUrl('/');
+    }, error => {
+      this.isError = true;
+      throwError(error);
+    });
 
   }
 }
