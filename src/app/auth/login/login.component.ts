@@ -6,6 +6,7 @@ import { LoginResponse } from './login-response';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -61,6 +62,9 @@ export class LoginComponent implements OnInit {
 
   login() {
 
+    this.waitAlert();
+    Swal.showLoading();
+
     this.loginRequest.username = this.loginForm.controls.username.value;
     this.loginRequest.password = this.loginForm.controls.password.value;
 
@@ -72,15 +76,28 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.loginRequest).subscribe(response => {
-      this.toastr.success('Sesión iniciada');
+      Swal.close();
       this.loginResponse = response;
       console.log(this.loginResponse);
       this.isError = false;
       this.router.navigateByUrl('/');
+      this.toastr.success('Sesión iniciada');
     }, error => {
+      Swal.close();
       this.isError = true;
       throwError(error);
     });
 
   }
+
+  waitAlert() {
+    Swal.fire({
+      icon: 'info',
+      title: 'Iniciando Sesión',
+      text: 'Espere porfavor...',
+      showConfirmButton: false,
+      allowOutsideClick: false
+    });
+  }
+
 }

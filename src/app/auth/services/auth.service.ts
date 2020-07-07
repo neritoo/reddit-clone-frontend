@@ -4,7 +4,7 @@ import { SignupRequest } from '../signup/signup-request';
 import { Observable } from 'rxjs';
 import { LoginRequest } from '../login/login-request';
 import { LoginResponse } from '../login/login-response';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { LocalStorageService } from 'ngx-webstorage';
 
 /*
@@ -19,6 +19,7 @@ username	string
 export class AuthService {
 
   url: string = 'https://reddit-clone-apirest.herokuapp.com/api';
+  urlLocal: string = 'http://localhost:8080/api'
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService) { }
 
@@ -38,6 +39,30 @@ export class AuthService {
         return response as LoginResponse;
       })
     );
+  }
+
+  getJwtToken() {
+    return this.localStorage.retrieve('authenticationToken');
+  }
+
+  refreshToken() {
+    const refreshTokenPayload = {
+      refreshToken: this.getRefreshToken(),
+      username: this.getUsername()
+    };
+    return this.http.post<LoginResponse>(`${this.url}/api/auth/refresh/token`, refreshTokenPayload)
+    .pipe(tap(response => {
+      this.localStorage.store('authenticationToken', response.authenticationToken);
+      this.localStorage.store('expiresAt', response.expiresAt)
+    }));
+  }
+
+  getRefreshToken() {
+    return this.localStorage.retrieve('refreshToken');
+  }
+
+  getUsername() {
+    return this.localStorage.retrieve('username');
   }
 
 }
