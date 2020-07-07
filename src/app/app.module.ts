@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { ToastrModule } from "ngx-toastr";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,10 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from './token.interceptor';
+import { PostCardComponent } from './posts/post-card/post-card.component';
+import { VoteButtonComponent } from './votes/vote-button/vote-button.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { SubredditSideBarComponent } from './subreddit/subreddit-side-bar/subreddit-side-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,11 @@ import { TokenInterceptor } from './token.interceptor';
     HeaderComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    PostCardComponent,
+    VoteButtonComponent,
+    SideBarComponent,
+    SubredditSideBarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,8 @@ import { TokenInterceptor } from './token.interceptor';
     ReactiveFormsModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

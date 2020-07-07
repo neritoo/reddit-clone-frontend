@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params.registered !== undefined && params.registered === 'true') {
         this.toastr.success('Usuario registrado correctamente');
-        this.registerSuccessMessage = 'Porfavor, verifique su bandeja de entradas en su correo electrónico' +
+        this.registerSuccessMessage = 'Porfavor, verifique su bandeja de entradas en su correo electrónico ' +
         'para activar su cuenta. Active su cuenta antes de iniciar sesión!'
       }
     });
