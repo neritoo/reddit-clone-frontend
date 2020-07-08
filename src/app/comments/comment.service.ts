@@ -26,4 +26,10 @@ export class CommentService {
        map(response => response as Comment[])
      );
    }
+
+   getAllCommentsForUser(username: string): Observable<Comment[]> {
+     return this.http.get(`${this.url}/comments/user/${username}`).pipe(
+       map(response => response as Comment[])
+     );
+   }
 }

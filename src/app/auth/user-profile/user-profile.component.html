@@ -1,0 +1,27 @@
+<div class="container">
+    <div>
+        Bienvenido <b>{{name}}</b>.<br /> Has posteado <b>{{postLength}}</b> vez(ces) y comentado
+        <b>{{commentLength}}</b> vez(ces). Podes ver tu historial de posts y comentarios aqui abajo:
+    </div>
+    <hr />
+    <div>
+        Tus Posts:
+    </div>
+    <app-post-card [posts]="posts"></app-post-card>
+    <hr />
+    <div>
+        Tus Comentarios:
+    </div>
+    <div *ngFor="let comment of comments">
+        <div class="comment">
+            <div class="username">
+                <a routerLink="/user/comment.username">{{comment.username}}</a>
+            </div>
+            <b>{{comment.text}}</b>
+            <div>
+                <p><small>{{comment.duration}}</small></p>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

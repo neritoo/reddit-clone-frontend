@@ -23,6 +23,12 @@ export class PostService {
         ));
   }
 
+  getAllPostsByUser(username: string): Observable<Post[]> {
+    return this.http.get(`${this.url}/username/${username}`).pipe(
+      map(response => response as Post[])
+    );
+  }
+
   getPost(postId: number): Observable<Post> {
     return this.http.get(`${this.url}/${postId}`).pipe(
       map(reponse => reponse as Post)

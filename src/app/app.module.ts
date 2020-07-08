@@ -7,6 +7,7 @@ import { NgxWebstorageModule } from "ngx-webstorage";
 import { ToastrModule } from "ngx-toastr";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EditorModule } from "@tinymce/tinymce-angular";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
 import { ViewPostComponent } from './posts/view-post/view-post.component';
 import { CommentsComponent } from './comments/comments.component';
+import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { CommentsComponent } from './comments/comments.component';
     ListSubredditsComponent,
     ViewPostComponent,
     CommentsComponent,
+    UserProfileComponent,
 
   ],
   imports: [
@@ -52,7 +55,8 @@ import { CommentsComponent } from './comments/comments.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FontAwesomeModule,
-    EditorModule
+    EditorModule,
+    NgbModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

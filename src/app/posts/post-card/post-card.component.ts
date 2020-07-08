@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 import { PostService } from '../post.service';
@@ -13,19 +13,15 @@ import { Router } from '@angular/router';
 export class PostCardComponent implements OnInit {
 
 
-  posts: Array<Post>;
+  @Input() posts: Array<Post>;
   faComments = faComments;
 
-  constructor(private postService: PostService, private router: Router) {
-    this.posts = [];
+  constructor(private router: Router) {
+
   }
 
   ngOnInit(): void {
-    this.getPosts();
-  }
 
-  getPosts() {
-    this.postService.getAllPosts().subscribe(response => this.posts = response)
   }
 
   goToPost(postId: number) {

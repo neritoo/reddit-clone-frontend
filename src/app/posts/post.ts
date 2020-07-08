@@ -8,4 +8,6 @@ export class Post {
     subredditName: string;
     commentCount: number;
     duration: string;
+    upVote: boolean;
+    downVote: boolean;
 }
