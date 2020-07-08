@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxWebstorageModule } from "ngx-webstorage";
 import { ToastrModule } from "ngx-toastr";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { EditorModule } from "@tinymce/tinymce-angular";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,11 @@ import { PostCardComponent } from './posts/post-card/post-card.component';
 import { VoteButtonComponent } from './votes/vote-button/vote-button.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SubredditSideBarComponent } from './subreddit/subreddit-side-bar/subreddit-side-bar.component';
+import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
+import { CreatePostComponent } from './posts/create-post/create-post.component';
+import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
+import { ViewPostComponent } from './posts/view-post/view-post.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { SubredditSideBarComponent } from './subreddit/subreddit-side-bar/subred
     PostCardComponent,
     VoteButtonComponent,
     SideBarComponent,
-    SubredditSideBarComponent
+    SubredditSideBarComponent,
+    CreateSubredditComponent,
+    CreatePostComponent,
+    ListSubredditsComponent,
+    ViewPostComponent,
+    CommentsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -39,7 +51,8 @@ import { SubredditSideBarComponent } from './subreddit/subreddit-side-bar/subred
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    EditorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

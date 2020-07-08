@@ -19,4 +19,10 @@ export class SubredditService {
     )
   }
 
+  createSubreddit(subreddit: Subreddit): Observable<Subreddit> {
+    return this.http.post(`${this.url}/subreddit`, subreddit).pipe(
+      map(response => response as Subreddit)
+    );
+  }
+
 }

@@ -3,6 +3,7 @@ import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 import { PostService } from '../post.service';
 import { Post } from '../post';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -15,7 +16,7 @@ export class PostCardComponent implements OnInit {
   posts: Array<Post>;
   faComments = faComments;
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private router: Router) {
     this.posts = [];
   }
 
@@ -28,7 +29,7 @@ export class PostCardComponent implements OnInit {
   }
 
   goToPost(postId: number) {
-    
+    this.router.navigate(['view-post', postId]);
   }
 
   upvotePost() {
