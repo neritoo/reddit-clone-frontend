@@ -1,15 +1,25 @@
 <div class="container">
     <div>
-        Bienvenido <b>{{name}}</b>.<br /> Has posteado <b>{{postLength}}</b> vez(ces) y comentado
-        <b>{{commentLength}}</b> vez(ces). Podes ver tu historial de posts y comentarios aqui abajo:
+        Bienvenido/a <b>{{name}}</b>.<br /> Has posteado <b>{{postLength}} </b>
+        <b *ngIf="postLength == 1">vez</b>
+        <b *ngIf="postLength != 1">veces</b> y comentado
+        <b>{{commentLength}} </b>
+        <b *ngIf="commentLength == 1">vez</b>
+        <b *ngIf="commentLength != 1">veces</b>. Podés ver tu historial de posts y comentarios aqui abajo:
     </div>
     <hr />
-    <div>
+    <div class="alert alert-warning col-md-4" *ngIf="postLength == 0">
+        No tenés Posts! <a [routerLink]="['/create-post']">Empieza a postear</a>
+    </div>
+    <div *ngIf="postLength > 0">
         Tus Posts:
     </div>
     <app-post-card [posts]="posts"></app-post-card>
     <hr />
-    <div>
+    <div class="alert alert-warning col-md-4" *ngIf="commentLength == 0">
+        No tenés comentarios!
+    </div>
+    <div *ngIf="commentLength > 0">
         Tus Comentarios:
     </div>
     <div *ngFor="let comment of comments">

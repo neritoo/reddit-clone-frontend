@@ -48,8 +48,13 @@ export class VoteButtonComponent implements OnInit {
 
     this.voteService.vote(this.voteRequest).subscribe(response => {
       this.updateDetails();
-      this.toastr.success(response);
+      this.toastr.success(response.message);
     }, error => {
+      if (error.status === 403) {
+        this.toastr.error('Para votar debes estar logueado!');
+        throwError(error);
+        return;
+      }
       this.toastr.error(error.error.error);
       throwError(error);
     });
