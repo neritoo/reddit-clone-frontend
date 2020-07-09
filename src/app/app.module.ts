@@ -26,6 +26,7 @@ import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subred
 import { ViewPostComponent } from './posts/view-post/view-post.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { ViewSubredditComponent } from './subreddit/view-subreddit/view-subreddit.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
     ViewPostComponent,
     CommentsComponent,
     UserProfileComponent,
+    ViewSubredditComponent,
 
   ],
   imports: [

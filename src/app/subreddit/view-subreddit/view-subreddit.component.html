@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <hr />
+        <div class="col-md-9">
+            <div class="row post">
+                <div class="col-md-11">
+                    <hr />
+                    <a routerLink="post.url" class="post-title">{{subreddit.name}}</a>
+                    <div>
+                        <p class="post-text" [innerHtml]="subreddit.description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <app-side-bar></app-side-bar>
+            <app-subreddit-side-bar></app-subreddit-side-bar>
+        </div>
+    </div>
+</div>
