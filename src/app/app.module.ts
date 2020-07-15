@@ -27,6 +27,8 @@ import { ViewPostComponent } from './posts/view-post/view-post.component';
 import { CommentsComponent } from './comments/comments.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { ViewSubredditComponent } from './subreddit/view-subreddit/view-subreddit.component';
+import { OtherUserComponent } from './auth/user-profile/other-user/other-user.component';
+import { UserCardComponent } from './auth/user-profile/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ViewSubredditComponent } from './subreddit/view-subreddit/view-subreddi
     CommentsComponent,
     UserProfileComponent,
     ViewSubredditComponent,
+    OtherUserComponent,
+    UserCardComponent,
 
   ],
   imports: [

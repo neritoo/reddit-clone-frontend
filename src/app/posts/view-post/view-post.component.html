@@ -29,14 +29,19 @@
                         </form>
                     </div>
                     <div style="margin-top: 60px;" *ngFor="let comment of comments">
-                        <div class="comment">
-                            <div class="username">
-                                <a routerLink="/user/comment.username">{{comment.username}}</a>
+                        <div class="comment row">
+                            <div class="col-sm-1">
+                                <!-- <app-vote-button [post]="post"></app-vote-button> -->
                             </div>
-                            <div>
-                                <p>{{comment.duration}}</p>
+                            <div class="col-sm-11">
+                                <div class="username">
+                                    <a routerLink="/user/comment.username">{{comment.username}}</a>
+                                </div>
+                                <b>{{comment.text}}</b>
+                                <div>
+                                    <p><small>{{comment.duration}}</small></p>
+                                </div>
                             </div>
-                            <b>{{comment.text}}</b>
                         </div>
                         <hr />
                     </div>
