@@ -23,6 +23,7 @@ export class AuthService {
 
 
   url: string = 'https://reddit-clone-apirest.herokuapp.com/api';
+  urlLocal: string = 'http://localhost:8080/api'
 
   refreshTokenPayload = {
     refreshToken: this.getRefreshToken(),
@@ -37,12 +38,14 @@ export class AuthService {
   }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post(`${this.url}/auth/login`, loginRequest).pipe(
+    return this.http.post(`${this.urlLocal}/auth/login`, loginRequest).pipe(
       map((response: any) => {
         this.localStorage.store('authenticationToken', response.authenticationToken);
-        this.localStorage.store('username', response.username);
         this.localStorage.store('refreshToken', response.refreshToken);
         this.localStorage.store('expiresAt', response.expiresAt);
+        this.localStorage.store('username', response.username);
+        this.localStorage.store('email', response.email);
+        this.localStorage.store('role', response.role);
 
         this.loggedIn.emit(true);
         this.username.emit(response.username);
@@ -63,6 +66,8 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.localStorage.clear('email');
+    this.localStorage.clear('role');
 
   }
 
@@ -92,6 +97,10 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
+  }
+
+  hasRole(role: string): boolean {
+    return this.localStorage.retrieve('role') === role;
   }
 
 }

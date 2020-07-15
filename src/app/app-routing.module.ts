@@ -12,11 +12,12 @@ import { AuthGuard } from './auth/auth.guard';
 import { ViewSubredditComponent } from './subreddit/view-subreddit/view-subreddit.component';
 import { UserGuard } from './auth/user.guard';
 import { OtherUserComponent } from './auth/user-profile/other-user/other-user.component';
+import { RoleGuard } from './auth/role.guard';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'} },
   { path: 'view-post/:id', component: ViewPostComponent },
   { path: 'user-profile/:name', component: UserProfileComponent, canActivate: [AuthGuard, UserGuard] },
   { path: 'user/:name', component: OtherUserComponent },
