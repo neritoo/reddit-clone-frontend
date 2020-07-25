@@ -3,4 +3,5 @@ export class Subreddit {
     name: string;
     description: string;
     numberOfPosts?: number;
+    username: string;
 }

@@ -29,6 +29,12 @@ export class PostService {
     );
   }
 
+  getAllPostsBySubreddit(subredditId: number): Observable<Post[]> {
+    return this.http.get(`${this.url}/subreddit/${subredditId}`).pipe(
+      map(response => response as Post[])
+    );
+  }
+
   getPost(postId: number): Observable<Post> {
     return this.http.get(`${this.url}/${postId}`).pipe(
       map(reponse => reponse as Post)

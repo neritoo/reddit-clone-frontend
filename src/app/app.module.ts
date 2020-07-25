@@ -29,6 +29,7 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
 import { ViewSubredditComponent } from './subreddit/view-subreddit/view-subreddit.component';
 import { OtherUserComponent } from './auth/user-profile/other-user/other-user.component';
 import { UserCardComponent } from './auth/user-profile/user-card/user-card.component';
+import { SubredditCardComponent } from './subreddit/subreddit-card/subreddit-card.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UserCardComponent } from './auth/user-profile/user-card/user-card.compo
     ViewSubredditComponent,
     OtherUserComponent,
     UserCardComponent,
+    SubredditCardComponent,
 
   ],
   imports: [
